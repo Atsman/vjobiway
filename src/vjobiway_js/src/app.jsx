@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -28,6 +28,9 @@ function App(props) {
   );
 }
 
+App.propTypes = {
+};
+
 ReactDOM.render(
   <Provider store={store}>
     <Router history={history}>
@@ -41,3 +44,4 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('main'),
 );
+
