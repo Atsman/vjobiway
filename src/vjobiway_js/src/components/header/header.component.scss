@@ -1,0 +1,35 @@
+@import '../../static/scss/layout/index';
+
+.header-container {
+  border-bottom: 1px solid rgba(150, 150, 150, 0.31);
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  @extend .container;
+}
+
+.header__logo {
+}
+
+.header__nav {
+  display: flex;
+  flex-direction: row;
+}
+
+.header__item {
+  padding: 5px 10px;
+  transition: background-color 0.5s ease;
+  text-decoration: none;
+  &:hover {
+    @extend .header__item--active;
+  }
+}
+
+.header__item--active {
+  background-color: #e9e9e9;
+}

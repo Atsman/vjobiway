@@ -1,0 +1,48 @@
+$body-color: #fff;
+$primary-font-color: #000;
+$font-size-base: 1.6rem;
+$primary-font: OpenSans, sans-serif;
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+
+html, body {
+  height: 100%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-color: $body-color;
+  color: $primary-font-color;
+  font-family: $primary-font;
+  font-size: $font-size-base;
+  text-rendering: optimizeLegibility;
+  letter-spacing: .075em;
+}
+
+a {
+  color: $primary-font-color;
+  text-decoration: none;
+}
+
+img {
+  vertical-align: middle;
+}
+
+img,
+video,
+canvas {
+  max-width: 100%;
+}
