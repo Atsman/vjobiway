@@ -5,12 +5,12 @@
 }
 
 .header {
+  @extend .container;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px;
-  @extend .container;
 }
 
 .header__logo {
@@ -24,7 +24,6 @@
 .header__item {
   padding: 5px 10px;
   transition: background-color 0.5s ease;
-  text-decoration: none;
   &:hover {
     @extend .header__item--active;
   }

@@ -1,0 +1,29 @@
+@import '../../static/scss/layout/index';
+
+.footer-container {
+  position:absolute;
+  bottom:0;
+  width:100%;
+  padding:5px 10px;
+  border-top: 1px solid rgba(150, 150, 150, 0.31);
+}
+
+.footer {
+  @extend .container;
+}
+
+.footer__items__right {
+  padding: 0 20px 0 0;
+}
+
+.footer__items {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-between;
+  align-items: center;
+  padding:5px 10px;
+}
+
+.footer__item {
+  padding: 5px 10px;
+}
