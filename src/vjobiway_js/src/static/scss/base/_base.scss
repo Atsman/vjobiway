@@ -1,11 +1,9 @@
 $body-color: #fff;
-$primary-font-color: #000;
 $font-size-base: 1.6rem;
 $primary-font: OpenSans, sans-serif;
 
 html {
   box-sizing: border-box;
-  font-size: 62.5%;
 }
 
 html, body {
@@ -24,8 +22,8 @@ html, body {
 }
 
 body {
-  background-color: $body-color;
-  color: $primary-font-color;
+  background-color: $grey-light;
+  color: $primary-text;
   font-family: $primary-font;
   font-size: $font-size-base;
   text-rendering: optimizeLegibility;
@@ -33,7 +31,7 @@ body {
 }
 
 a {
-  color: $primary-font-color;
+  color: $primary-text;
   text-decoration: none;
 }
 
