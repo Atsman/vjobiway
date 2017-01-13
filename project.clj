@@ -10,7 +10,10 @@
                  [ring/ring-defaults "0.2.1"]
                  [com.apa512/rethinkdb "0.15.26"]
                  [com.stuartsierra/component "0.3.1"]
-                 [cheshire "5.6.3"]]
+                 [cheshire "5.6.3"]
+                 [clj-soup/clojure-soup "0.1.3"]
+                 [clj-time "0.12.0"]
+                 [hiccup "1.0.5"]]
   :profiles
   {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
                         [ring/ring-mock "0.3.0"]]}})
