@@ -4,7 +4,7 @@
             [vjobiway.db.db-component :refer [db-component]]))
 
 (defn create-db-component []
-  (db-component "localhost" 28015 "test"))
+  (db-component "localhost" 5432 "test"))
 
 (deftest db-component-test
   (testing "factory function"

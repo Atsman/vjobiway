@@ -1,15 +1,14 @@
 (ns vjobiway.db.vacancy
-  (:require [rethinkdb.query :as r]))
+  (:require [clojure.java.jdbc :as sql]))
 
-(def VACANCIES "vacancies")
+(def VACANCIES "vjobiway.VACANCIES")
 
 (defn get-vacancies
   [conn]
-  (-> (r/table VACANCIES)
-      (r/run conn)))
+    (sql/with-db-connection [c conn] 
+      (sql/query c ["select * from vjobiway.VACANCIES"])))
 
 (defn get-vacancy
   [conn id]
-  (-> (r/table VACANCIES)
-      (r/get id)
-      (r/run conn)))
+    (sql/with-db-connection [c conn]
+      (sql/query c ["select * from vjobiway.VACANCIES where id = $1", id])))

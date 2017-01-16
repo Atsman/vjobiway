@@ -1,12 +1,26 @@
 (ns vjobiway.db.db
-  (:require [rethinkdb.core :as rc]
-            [rethinkdb.query :as r]))
+  (:require [clojure.java.jdbc :as sql]
+            [hikari-cp.core :as cp]
+            [vjobiway.db.migration :as migration]))
+
+(def db-spec
+  {:auto-commit true
+   :read-only false
+   :pool-name "db-pool"
+   :adapter "postgresql"
+   :username "postgres"
+   :password "mysecretpassword"
+   :register-mbeans false})
 
 (defn connect-to-database [host port db]
-  (rc/connect :host host :port port :db db))
+  {:datasource (cp/make-datasource (assoc db-spec :server-name host :port-number port :database-name db ))})
 
-(defn close-connection [connection]
-  (rc/close connection))
+(defn connect-and-create-schema [host port db]
+  (let [connection (connect-to-database host port db)]
+    (migration/init)
+    connection))
+  
 
-(defn create-db [connection db-name]
-  (r/run (r/db-create db-name) connection))
+(defn close-connection [datasource]
+  (cp/close-datasource (:datasource datasource)))
+

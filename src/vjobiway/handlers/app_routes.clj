@@ -12,5 +12,4 @@
     (GET "/" [] (main-layout "hello-world"))
     (GET "/api/vacancies" [] (vacancy/get-vacancies app-component))
     (GET "/api/vacancies/:id" [id] (vacancy/get-vacancy app-component id))
-    (route/resources "/")
     (route/not-found "Not Found")))
