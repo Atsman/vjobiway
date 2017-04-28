@@ -3,6 +3,8 @@
             [ring.mock.request :as mock]
             [vjobiway.handlers.app-routes :refer :all]))
 
+;; TODO: fix this tests.
+
 (deftest test-app
   (testing "main route"
     (let [response (app (mock/request :get "/"))]

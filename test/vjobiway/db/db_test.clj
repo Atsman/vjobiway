@@ -2,7 +2,7 @@
   (:require [clojure.test :refer :all]
             [vjobiway.db.db :refer :all]))
 
-(deftest test-db
+(deftest ^:integration test-db
   (testing "connect-to-database"
     (is (not (= nil (connect-to-database "localhost" 28015 "test")))))
 

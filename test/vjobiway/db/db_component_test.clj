@@ -6,7 +6,7 @@
 (defn create-db-component []
   (db-component "localhost" 5432 "test"))
 
-(deftest db-component-test
+(deftest ^:integration db-component-test
   (testing "factory function"
     (let [db-comp (create-db-component)]
       (is (not (= nil db-comp)))))
