@@ -3,4 +3,3 @@
             [ring.mock.request :as mock]
             [vjobiway.handlers.vacancy :as vacancy]))
 
-

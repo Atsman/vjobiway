@@ -8,7 +8,7 @@
   (let [[app-port] args]
     (log/info ";; -main - starting app-system")
     (component/start
-      (system/app-system {:http-port 9000
-                          :db-host "localhost"
-                          :db-port 5432
-                          :db-name "jobs"}))))
+     (system/app-system {:http-port 9000
+                         :db-host "localhost"
+                         :db-port 5432
+                         :db-name "jobs"}))))
