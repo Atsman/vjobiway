@@ -1,7 +1,7 @@
 (ns vjobiway.db.migration
   (:require [clojure.java.jdbc :as sql]
             [clojure.tools.logging :as log]
-	    [migratus.core :as migratus]))
+            [migratus.core :as migratus]))
 
 (def config {:store :database
              :migration-dir "migrations/"
@@ -16,4 +16,4 @@
              ;:db "postgres://postgres:mysecretpassword@localhost/jobs?sslmode=disable"})
 
 (defn init []
-  (migratus/init config)) 
+  (migratus/init config))

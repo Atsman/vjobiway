@@ -15,7 +15,5 @@
 
 (defn app-component
   [config-options]
-  (map->AppComponent {
-    :opitons config-options
-    :cache (atom {})
-  }))
+  (map->AppComponent {:opitons config-options
+                      :cache (atom {})}))

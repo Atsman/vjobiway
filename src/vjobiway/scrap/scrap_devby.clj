@@ -14,8 +14,8 @@
 
 (defn texts [selector doc]
   (->
-    ($/select selector doc)
-    ($/text)))
+   ($/select selector doc)
+   ($/text)))
 
 (defn text [selector doc]
   (first (texts selector doc)))
@@ -27,15 +27,13 @@
   (first ($/attr "datetime" ($/select DUE_TO_SELECTOR doc))))
 
 (defn parse-vacancy-page [html]
- (let [doc ($/parse html)]
-    {
-      :title (text TITLE_SELECTOR doc)
-      :description (text DESCRIPTION_SELECTOR doc)
-      :company (text COMPANY_SELECTOR doc)
-      :city (text CITY_SELECTOR doc)
-      :dueTo (parse (custom-format) (get-time doc))
-      :type (text TYPE_SELECTOR doc)
-      :level (text LEVEL_SELECTOR doc)
-      :skills (map #(.text %) ($/select SKILLS_SELECTOR doc))
-    }))
+  (let [doc ($/parse html)]
+    {:title (text TITLE_SELECTOR doc)
+     :description (text DESCRIPTION_SELECTOR doc)
+     :company (text COMPANY_SELECTOR doc)
+     :city (text CITY_SELECTOR doc)
+     :dueTo (parse (custom-format) (get-time doc))
+     :type (text TYPE_SELECTOR doc)
+     :level (text LEVEL_SELECTOR doc)
+     :skills (map #(.text %) ($/select SKILLS_SELECTOR doc))}))
 

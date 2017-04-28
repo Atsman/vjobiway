@@ -12,11 +12,11 @@
 (defn app-system
   [config-options]
   (component/system-map
-    :config-options config-options
-    :db (apply db-component (get-db-config config-options))
-    :core (component/using
-            (app-component config-options)
-            {:db-component :db})
-    :http (component/using
-            (http-component (:http-port config-options))
-            {:app-component :core})))
+   :config-options config-options
+   :db (apply db-component (get-db-config config-options))
+   :core (component/using
+          (app-component config-options)
+          {:db-component :db})
+   :http (component/using
+          (http-component (:http-port config-options))
+          {:app-component :core})))

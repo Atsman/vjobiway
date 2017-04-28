@@ -10,7 +10,7 @@
   (start [this]
     (log/info ";; HttpComponent - start http server")
     (assoc this :http-server
-      (jetty/run-jetty (app-routes app-component) { :port port :join false })))
+           (jetty/run-jetty (app-routes app-component) {:port port :join false})))
 
   (stop [this]
     (log/info ";; HttpComponent - stop http server")
@@ -19,4 +19,4 @@
 
 (defn http-component
   [port]
-  (map->HttpComponent { :port port }))
+  (map->HttpComponent {:port port}))
