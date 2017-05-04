@@ -2,7 +2,7 @@
   :description "FIXME: write description"
   :url "http://example.com/FIXME"
   :min-lein-version "2.0.0"
-  :main vjobiway.main
+  ;; :main vjobiway.main
   :dependencies [[org.clojure/clojure "1.8.0"]
 
                  ; Logging dependencies
@@ -31,6 +31,9 @@
 
   :plugins [[lein-cljfmt "0.5.6"]
             [lein-ancient "0.6.10"]]
-  :profiles
-  {:dev {:dependencies [[javax.servlet/servlet-api "2.5"]
-                        [ring/ring-mock "0.3.0"]]}})
+
+  :profiles {:dev {:dependencies [[org.clojure/tools.namespace "0.2.11"]
+                                  [com.stuartsierra/component.repl "0.2.0"]
+                                  [javax.servlet/servlet-api "2.5"]
+                                  [ring/ring-mock "0.3.0"]]
+                   :source-paths ["dev"]}})
