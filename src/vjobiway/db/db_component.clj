@@ -8,14 +8,23 @@
 
   (start [component]
     (log/info ";; DbComponent - Starting database")
-    (let [conn (connect-and-create-schema host port db)]
-      (log/info ";; DbComponent - Database started")
-      (assoc component :connection conn)))
+    (if connection
+      component
+      (try
+        (let [conn (connect-and-create-schema host port db)]
+          (log/info ";; DbComponent - Database started")
+          (assoc component :connection conn))
+        (catch Throwable t (log/error t "Error while connecting to database"))))
+    component)
 
   (stop [component]
-    (log/info ";; Stopping database")
-    (close-connection connection)
-    (assoc component :connection nil)))
+    (log/info ";; Stopping database this:" component)
+    (if (not connection)
+      component 
+      (do
+        (try (close-connection connection)
+          (catch Throwable t (log/error t "Error while closing connection")))
+        (assoc component :connection nil)))))
 
 (defn db-component [host port db]
   (map->DbComponent {:host host :port port :db db}))
