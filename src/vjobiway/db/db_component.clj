@@ -14,8 +14,7 @@
         (let [conn (connect-and-create-schema host port db)]
           (log/info ";; DbComponent - Database started")
           (assoc component :connection conn))
-        (catch Throwable t (log/error t "Error while connecting to database"))))
-    component)
+        (catch Throwable t (log/error t "Error while connecting to database")))))
 
   (stop [component]
     (log/info ";; Stopping database this:" component)

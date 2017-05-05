@@ -1,10 +1,11 @@
 (ns vjobiway.db.db-component-test
   (:require [clojure.test :refer :all]
+            [clojure.tools.logging :as log]
             [com.stuartsierra.component :as component]
             [vjobiway.db.db-component :refer [db-component]]))
 
 (defn create-db-component []
-  (db-component "localhost" 5432 "test"))
+  (db-component "localhost" 5432 "jobs"))
 
 (deftest ^:integration db-component-test
   (testing "factory function"
@@ -13,7 +14,9 @@
 
   (testing "start"
     (let [db-comp (component/start (create-db-component))]
-      (is (:connection db-comp))))
+      (log/info db-comp)
+      (is (:connection db-comp))
+      (component/stop db-comp)))
 
   (testing "stop"
     (let [db-comp (component/stop (component/start (create-db-component)))]

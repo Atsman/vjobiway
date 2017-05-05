@@ -13,7 +13,9 @@
    :register-mbeans false})
 
 (defn connect-to-database [host port db]
-  {:datasource (cp/make-datasource (assoc db-spec :server-name host :port-number port :database-name db))})
+  {:datasource (cp/make-datasource (assoc db-spec :server-name host 
+                                                  :port-number port 
+                                                  :database-name db))})
 
 (defn connect-and-create-schema [host port db]
   (let [connection (connect-to-database host port db)]
