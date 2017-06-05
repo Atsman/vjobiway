@@ -2,7 +2,7 @@
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.logging :as log]))
 
-(defrecord AppComponent [options cache db-component]
+(defrecord AppComponent [db-component]
   component/Lifecycle
 
   (start [this]
@@ -13,7 +13,6 @@
     (log/info ";; Stoping app")
     this))
 
-(defn app-component
-  [config-options]
-  (map->AppComponent {:opitons config-options
-                      :cache (atom {})}))
+(defn app-component 
+  ([] (app-component {}))
+  ([config] (map->AppComponent {})))

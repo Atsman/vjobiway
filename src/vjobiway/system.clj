@@ -10,7 +10,7 @@
    :config-options config-options
    :db (db-component)
    :core (component/using
-          (app-component config-options)
+          (app-component)
           {:db-component :db})
    :http (component/using
           (http-component (:http-port config-options))
