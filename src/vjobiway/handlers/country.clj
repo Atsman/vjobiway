@@ -5,15 +5,17 @@
 
 (defn get-countries
   [app-component]
-  (log/info "get-countries")
+  (log/debug ";; get-countries")
   (-> (:db-component app-component)
       (cdb/get-countries)
       (http-resp/ok)))
 
 (defn get-country
   [app id]
-  (log/info ";; get-country, id = " id)
-  (let [country (cdb/get-country (:db-component app) id)]
-    (if (= nil country)
-      (http-resp/not-found)
-      (http-resp/ok country))))
+  (log/debug ";; get-country, id = " id)
+  (if (not (integer? id))
+    (http-resp/bad-request {:error "id must be an integer"})
+    (let [country (cdb/get-country (:db-component app) id)]
+      (if (= nil country)
+        (http-resp/not-found)
+        (http-resp/ok country)))))
