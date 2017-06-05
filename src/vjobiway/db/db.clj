@@ -1,27 +1,32 @@
 (ns vjobiway.db.db
   (:require [clojure.java.jdbc :as sql]
             [hikari-cp.core :as cp]
-            [vjobiway.db.migration :as migration]))
+            [migratus.core :as migratus]
+            [environ.core :refer [env]]))
 
-(def db-spec
-  {:auto-commit true
-   :read-only false
-   :pool-name "db-pool"
-   :adapter "postgresql"
-   :username "postgres"
-   :password "mysecretpassword"
-   :register-mbeans false})
+(def db-spec {:auto-commit true
+              :read-only false
+              :pool-name "db-pool"
+              :adapter "postgresql"
+              :register-mbeans false
+              :url (env :database-url)})
 
-(defn connect-to-database [host port db]
-  {:datasource (cp/make-datasource (assoc db-spec :server-name host 
-                                                  :port-number port 
-                                                  :database-name db))})
+(def migration-config {:store :database
+                       :migration-dir "migrations/"
+                       :init-script "init.sql"
+                       :migration-table-name "vjobiway.migrations"
+                       :db (env :database-url)})
 
-(defn connect-and-create-schema [host port db]
-  (let [connection (connect-to-database host port db)]
-    (migration/init)
-    connection))
+(defn- create-or-migrate-schema [config]
+  (migratus/init config)
+  (migratus/migrate config))
+
+(defn connect-to-database [config]
+  {:datasource (cp/make-datasource config)})
+
+(defn connect-and-create-or-migrate-schema []
+  (create-or-migrate-schema migration-config)
+  (connect-to-database db-spec))
 
 (defn close-connection [datasource]
   (cp/close-datasource (:datasource datasource)))
-

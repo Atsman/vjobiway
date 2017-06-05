@@ -1,21 +1,30 @@
 (ns vjobiway.handlers.http-component
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.logging :as log]
-            [ring.adapter.jetty :as jetty]
+            [ring.component.jetty :refer [jetty-server]]
             [vjobiway.handlers.app-routes :refer [app-routes]]))
 
-(defrecord HttpComponent [http-server app-component port]
+(defn- jetty-component
+  [app-component port]
+  (jetty-server {:port port
+                 :app {:handler (app-routes app-component)}}))
+
+(defrecord HttpComponent [app-component port]
   component/Lifecycle
 
   (start [this]
-    (log/info ";; HttpComponent - start http server")
-    (assoc this :http-server
-           (jetty/run-jetty (app-routes app-component) {:port port :join false})))
+    (log/info ";; HttpComponent - start")
+    (let [jetty (jetty-component app-component port)]
+      (assoc this :jetty jetty)
+      (component/start jetty)))
 
   (stop [this]
     (log/info ";; HttpComponent - stop http server")
-    (.stop http-server)
-    this))
+    (log/info ";; HttpComponent content" this)
+    (let [jetty (:jetty this)]
+      (component/stop jetty)
+      (assoc this :jetty nil)
+      this)))
 
 (defn http-component
   [port]

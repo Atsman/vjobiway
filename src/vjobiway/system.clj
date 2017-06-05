@@ -4,16 +4,11 @@
             [vjobiway.handlers.http-component :refer [http-component]]
             [vjobiway.app-component :refer [app-component]]))
 
-(defn get-db-config
-  [config-options]
-  (let [{:keys [db-host db-port db-name]} config-options]
-    (list db-host db-port db-name)))
-
 (defn app-system
   [config-options]
   (component/system-map
    :config-options config-options
-   :db (apply db-component (get-db-config config-options))
+   :db (db-component)
    :core (component/using
           (app-component config-options)
           {:db-component :db})

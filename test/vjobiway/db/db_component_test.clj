@@ -4,20 +4,19 @@
             [com.stuartsierra.component :as component]
             [vjobiway.db.db-component :refer [db-component]]))
 
-(defn create-db-component []
-  (db-component "localhost" 5432 "jobs"))
-
 (deftest ^:integration db-component-test
   (testing "factory function"
-    (let [db-comp (create-db-component)]
+    (let [db-comp (db-component)]
       (is (not (= nil db-comp)))))
 
   (testing "start"
-    (let [db-comp (component/start (create-db-component))]
+    (let [db-comp (component/start (db-component))]
       (log/info db-comp)
       (is (:connection db-comp))
       (component/stop db-comp)))
 
   (testing "stop"
-    (let [db-comp (component/stop (component/start (create-db-component)))]
+    (let [db-comp (-> (db-component)
+                      (component/start)
+                      (component/stop))]
       (is (= nil (:connection db-comp))))))

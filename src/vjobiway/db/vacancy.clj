@@ -1,19 +1,22 @@
 (ns vjobiway.db.vacancy
-  (:require [clojure.java.jdbc :as sql]))
+  (:require [clojure.tools.logging :as log]
+            [clojure.java.jdbc :as sql]))
 
-(def VACANCIES "vjobiway.VACANCIES")
+(def VACANCIES "vjobiway.vacancies")
 
-(defn save-vacancy
+(defn create-vacancy
   [database vacancy]
   (sql/with-db-connection [c (:connection database)]
-    (sql/insert! c vacancy)))
+    (-> (sql/insert! c VACANCIES vacancy)
+        (first))))
 
 (defn get-vacancies
   [database]
   (sql/with-db-connection [c (:connection database)]
-    (sql/query c ["select * from vjobiway.VACANCIES"])))
+    (sql/query c ["select * from vjobiway.vacancies"])))
 
 (defn get-vacancy
   [database id]
   (sql/with-db-connection [c (:connection database)]
-    (sql/query c ["select * from vjobiway.VACANCIES where id = $1", id])))
+    (-> (sql/query c ["SELECT * FROM vjobiway.vacancies WHERE vacancy_id = ?::integer" id])
+        (first))))

@@ -1,9 +1,9 @@
 (ns vjobiway.db.db-component
   (:require [com.stuartsierra.component :as component]
             [clojure.tools.logging :as log]
-            [vjobiway.db.db :refer [connect-and-create-schema close-connection]]))
+            [vjobiway.db.db :as db]))
 
-(defrecord DbComponent [host port db connection]
+(defrecord DbComponent [connection]
   component/Lifecycle
 
   (start [component]
@@ -11,7 +11,7 @@
     (if connection
       component
       (try
-        (let [conn (connect-and-create-schema host port db)]
+        (let [conn (db/connect-and-create-or-migrate-schema)]
           (log/info ";; DbComponent - Database started")
           (assoc component :connection conn))
         (catch Throwable t (log/error t "Error while connecting to database")))))
@@ -19,11 +19,11 @@
   (stop [component]
     (log/info ";; Stopping database this:" component)
     (if (not connection)
-      component 
+      component
       (do
-        (try (close-connection connection)
-          (catch Throwable t (log/error t "Error while closing connection")))
+        (try (db/close-connection connection)
+             (catch Throwable t (log/error t "Error while closing connection")))
         (assoc component :connection nil)))))
 
-(defn db-component [host port db]
-  (map->DbComponent {:host host :port port :db db}))
+(defn db-component []
+  (map->DbComponent {}))

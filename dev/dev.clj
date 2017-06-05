@@ -8,21 +8,19 @@
   `com.stuartsierra.component.repl/system`.
 
   See also https://github.com/stuartsierra/component.repl"
-  (:require
-   [clojure.java.io :as io]
-   [clojure.java.javadoc :refer [javadoc]]
-   [clojure.pprint :refer [pprint]]
-   [clojure.reflect :refer [reflect]]
-   [clojure.repl :refer [apropos dir doc find-doc pst source]]
-   [clojure.set :as set]
-   [clojure.string :as string]
-   [clojure.test :as test]
-   [clojure.tools.namespace.repl :refer [refresh refresh-all clear]]
-   [com.stuartsierra.component :as component]
-   [com.stuartsierra.component.repl :refer [reset set-init start stop system]]
-   [vjobiway.main]
-   [vjobiway.system :as app-system]))
-
+  (:require [clojure.java.io :as io]
+            [clojure.java.javadoc :refer [javadoc]]
+            [clojure.pprint :refer [pprint]]
+            [clojure.reflect :refer [reflect]]
+            [clojure.repl :refer [apropos dir doc find-doc pst source]]
+            [clojure.set :as set]
+            [clojure.string :as string]
+            [clojure.test :as test]
+            [clojure.tools.namespace.repl :refer [refresh refresh-all clear]]
+            [com.stuartsierra.component :as component]
+            [com.stuartsierra.component.repl :refer [reset set-init start stop system]]
+            [vjobiway.main]
+            [vjobiway.system :as app-system]))
 
 ;; Do not try to load source code from 'resources' directory
 (clojure.tools.namespace.repl/set-refresh-dirs "dev" "src" "test")
@@ -31,8 +29,8 @@
   "Constructs a system map suitable for interactive development."
   []
   (app-system/app-system {:http-port 9000
-                      :db-host "localhost"
-                      :db-port 5432
-                      :db-name "jobs"}))
+                          :db-host "localhost"
+                          :db-port 5432
+                          :db-name "jobs"}))
 
 (set-init (fn [_] (dev-system)))
