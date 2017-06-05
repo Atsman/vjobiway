@@ -2,7 +2,7 @@ CREATE SCHEMA IF NOT EXISTS vjobiway;
 
 CREATE TABLE IF NOT EXISTS vjobiway.countries(
   country_id SERIAL PRIMARY KEY,
-  code TEXT NOT NULL,
+  country_code TEXT NOT NULL,
   title TEXT NOT NULL
 );
 
