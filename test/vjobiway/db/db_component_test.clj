@@ -5,17 +5,17 @@
             [vjobiway.db.db-component :refer [db-component]]))
 
 (deftest ^:integration db-component-test
-  (testing "factory function"
+  (testing "db-component functory function should create component"
     (let [db-comp (db-component)]
       (is (not (= nil db-comp)))))
 
-  (testing "start"
+  (testing "db-component/start should connect to db and store connection"
     (let [db-comp (component/start (db-component))]
       (log/info db-comp)
       (is (:connection db-comp))
       (component/stop db-comp)))
 
-  (testing "stop"
+  (testing "db-component/stop should disconnect from db and remove connection"
     (let [db-comp (-> (db-component)
                       (component/start)
                       (component/stop))]
