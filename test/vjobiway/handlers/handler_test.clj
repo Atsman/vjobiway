@@ -6,9 +6,9 @@
 (deftest http-basic-test
   (testing "h/hello-world should return hello-world text"
     (let [response (test-app (mock/request :get "/"))]
-      (is (= (:status response) 200))
-      (is (= (:body response) "hello-world"))))
+      (is (= 200 (:status response)))
+      (is (= "hello-world" (:body response)))))
 
   (testing "h/not-found should return 404 on unknown route"
     (let [response (test-app (mock/request :get "/invalid"))]
-      (is (= (:status response) 404)))))
+      (is (= 404 (:status response))))))

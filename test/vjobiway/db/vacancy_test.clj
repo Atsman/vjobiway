@@ -30,4 +30,4 @@
 (deftest ^:integration get-vacancies-test
   (testing "vdb/get-vacancies should return empty list on empty database"
     (with-db (fn [db]
-               (is (list) (vdb/get-vacancies db))))))
+               (is (= (list) (vdb/get-vacancies db)))))))

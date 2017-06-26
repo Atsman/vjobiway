@@ -27,7 +27,7 @@
     (GET "/api/countries/:id" [id] (country/get-country app-component id))
 
     (GET "/api/cities" [] (city/get-cities app-component))
-    (GET "/api/cities/:id" [id] (city/get-cities app-routes id))
+    (GET "/api/cities/:id" [id] (city/get-city app-routes id))
     (route/not-found "Not Found"))
    (middleware/wrap-json-response)
    (middleware/wrap-json-body {:keywords? true})

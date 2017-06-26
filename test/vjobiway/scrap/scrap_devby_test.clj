@@ -10,11 +10,11 @@
 (deftest scrap-devby-test
   (testing "parse vacancy page"
     (let [vacancy (parse-vacancy-page (get-test-page))]
-      (is (= (:title vacancy) "Java developer"))
-      (is (not (= (:description vacancy) nil)))
-      (is (= (:company vacancy) "ITOS"))
-      (is (= (:city vacancy) "Минск"))
-      (is (= (:type vacancy) "Полный день"))
-      (is (= (:level vacancy) "Mid"))
-      (is (= (:skills vacancy) ["java" "Spring" "hibernate"]))
-      (is (= (:dueTo vacancy) (t/date-time 2016 11 02))))))
+      (is (= "Java developer" (:title vacancy)))
+      (is (not (= nil (:description vacancy))))
+      (is (= "ITOS" (:company vacancy)))
+      (is (= "Минск" (:city vacancy)))
+      (is (= "Полный день" (:type vacancy)))
+      (is (= "Mid" (:level vacancy)))
+      (is (= ["java" "Spring" "hibernate"] (:skills vacancy)))
+      (is (= (t/date-time 2016 11 02) (:dueTo vacancy))))))

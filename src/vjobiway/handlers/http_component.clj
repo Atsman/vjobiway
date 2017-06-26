@@ -15,15 +15,13 @@
   (start [this]
     (log/info ";; HttpComponent - start")
     (let [jetty (jetty-component app-component port)]
-      (assoc this :jetty jetty)
-      (component/start jetty)))
+      (component/start (assoc this :jetty jetty))))
 
   (stop [this]
     (log/info ";; HttpComponent - stop http server")
     (let [jetty (:jetty this)]
       (component/stop jetty)
-      (assoc this :jetty nil)
-      this)))
+      (assoc this :jetty nil))))
 
 (defn http-component
   [port]
