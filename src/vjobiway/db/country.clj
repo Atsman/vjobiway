@@ -9,5 +9,4 @@
 (defn get-country
   [database id]
   (sql/with-db-connection [c (:connection database)]
-    (-> (sql/query c ["SELECT * FROM vjobiway.countries WHERE country_id = ?" id])
-        (first))))
+    (first (sql/query c ["SELECT * FROM vjobiway.countries WHERE country_id = ?" id]))))

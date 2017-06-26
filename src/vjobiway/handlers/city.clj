@@ -14,6 +14,6 @@
   [app id]
   (log/info ";; get-city, id = " id)
   (let [city (cdb/get-city (:db-component app) id)]
-    (if (= nil city)
+    (if (nil? city)
       (http-resp/not-found)
       (http-resp/ok city))))

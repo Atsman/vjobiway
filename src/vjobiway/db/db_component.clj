@@ -18,7 +18,7 @@
 
   (stop [component]
     (log/info ";; Stopping database this:" component)
-    (if (not connection)
+    (if-not connection
       component
       (do
         (try (db/close-connection connection)

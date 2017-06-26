@@ -13,9 +13,7 @@
 (def SKILLS_SELECTOR "body > div.wrapper.dev.all > div:nth-child(3) > div.dev-all > div.dev-main > div > div.dev-center.nobrd.jobs-show > div > div.dev-left.col1.nopd.body-jobs > div > div.block.data-card > div > div > div.panel-middle > ul > li")
 
 (defn texts [selector doc]
-  (->
-   ($/select selector doc)
-   ($/text)))
+  ($/text ($/select selector doc)))
 
 (defn text [selector doc]
   (first (texts selector doc)))

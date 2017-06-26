@@ -21,6 +21,6 @@
   [app id]
   (log/info ";; get-company, id = " id)
   (let [company (cdb/get-company (:db-component app) id)]
-    (if (= nil company)
+    (if (nil? company)
       (http-resp/not-found)
       (http-resp/ok company))))

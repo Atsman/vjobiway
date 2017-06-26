@@ -9,7 +9,7 @@
 (def test-cases [{:input "{\"vacancy_id\":1,\"title\":\"Senior Software Engineer\",\"description\":\"Vacancy description\",\"company_id\":1,\"city_id\":1,\"type\":\"full_tyme\",\"level\":\"Senior\"}"
                   :response {:status 201
                              :headers {"Location" "http://localhost/api/vacancies/1"
-                                      "Content-Type" "application/json; charset=utf-8"}
+                                       "Content-Type" "application/json; charset=utf-8"}
                              :body "{\"vacancy_id\":1,\"title\":\"Senior Software Engineer\",\"description\":\"Vacancy description\",\"company_id\":1,\"city_id\":1,\"type\":\"full_tyme\",\"level\":\"Senior\"}"}}])
 
 (deftest http-create-vacancy-test

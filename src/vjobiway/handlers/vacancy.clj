@@ -29,6 +29,6 @@
   [app id]
   (log/info ";; get-vacancy, id = " id)
   (let [vacancy (vdb/get-vacancy (:db-component app) id)]
-    (if (= nil vacancy)
+    (if (nil? vacancy)
       (http-resp/not-found)
       (http-resp/ok vacancy))))

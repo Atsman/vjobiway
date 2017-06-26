@@ -6,8 +6,7 @@
 (defn create-company
   [database company]
   (sql/with-db-connection [c (:connection database)]
-    (-> (sql/insert! c COMPANIES company)
-        (first))))
+    (first (sql/insert! c COMPANIES company))))
 
 (defn get-companies
   [database]
@@ -17,5 +16,4 @@
 (defn get-company
   [database id]
   (sql/with-db-connection [c (:connection database)]
-    (-> (sql/query c ["SELECT * FROM vjobiway.companies WHERE id = ?" id])
-        (first))))
+    (first (sql/query c ["SELECT * FROM vjobiway.companies WHERE id = ?" id]))))

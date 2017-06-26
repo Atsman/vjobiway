@@ -26,7 +26,7 @@
                         (helpers/should-throw #(vdb/create-vacancy db vacancy))
                         (helpers/should-not-throw #(vdb/create-vacancy db vacancy))))
                     test-cases)))))
-  
+
 (deftest ^:integration get-vacancies-test
   (testing "vdb/get-vacancies should return empty list on empty database"
     (with-db (fn [db]

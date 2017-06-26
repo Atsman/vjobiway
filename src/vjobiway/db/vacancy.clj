@@ -8,8 +8,7 @@
   [database vacancy]
   {:pre [(some? database) (some? vacancy)]}
   (sql/with-db-connection [c (:connection database)]
-    (-> (sql/insert! c VACANCIES vacancy)
-        (first))))
+    (first (sql/insert! c VACANCIES vacancy))))
 
 (defn get-vacancies
   [database]
@@ -19,5 +18,4 @@
 (defn get-vacancy
   [database id]
   (sql/with-db-connection [c (:connection database)]
-    (-> (sql/query c ["SELECT * FROM vjobiway.vacancies WHERE vacancy_id = ?::integer" id])
-        (first))))
+    (first (sql/query c ["SELECT * FROM vjobiway.vacancies WHERE vacancy_id = ?::integer" id]))))

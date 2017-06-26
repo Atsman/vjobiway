@@ -13,6 +13,6 @@
     (log/info ";; Stoping app")
     this))
 
-(defn app-component 
+(defn app-component
   ([] (app-component {}))
   ([config] (map->AppComponent {})))
