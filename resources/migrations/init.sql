@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS vjobiway.vacancies(
   vacancy_id SERIAL PRIMARY KEY,
   title TEXT NOT NULL,
   description TEXT, 
-  company SERIAL REFERENCES vjobiway.companies(company_id),
+  company_id SERIAL REFERENCES vjobiway.companies(company_id),
   city_id SERIAL REFERENCES vjobiway.cities(city_id),
   "type" TEXT CHECK ("type" IN ('full_time', 'part_time')),
   "level" TEXT
