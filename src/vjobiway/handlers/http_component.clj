@@ -20,7 +20,6 @@
 
   (stop [this]
     (log/info ";; HttpComponent - stop http server")
-    (log/info ";; HttpComponent content" this)
     (let [jetty (:jetty this)]
       (component/stop jetty)
       (assoc this :jetty nil)

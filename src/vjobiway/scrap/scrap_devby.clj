@@ -36,4 +36,3 @@
      :type (text TYPE_SELECTOR doc)
      :level (text LEVEL_SELECTOR doc)
      :skills (map #(.text %) ($/select SKILLS_SELECTOR doc))}))
-
