@@ -36,7 +36,8 @@
 
   :plugins [[lein-environ "1.1.0"]
             [lein-cljfmt "0.5.6"]
-            [lein-ancient "0.6.10"]]
+            [lein-ancient "0.6.10"]
+            [venantius/ultra "0.5.1"]]
 
   :profiles {:dev {:env {:database-url "jdbc:postgresql://localhost/jobs?user=postgres&password=mysecretpassword"}
                    :dependencies [[org.clojure/tools.namespace "0.2.11"]
