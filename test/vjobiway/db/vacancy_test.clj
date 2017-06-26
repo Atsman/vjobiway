@@ -13,15 +13,21 @@
                             :level "Senior"}
                   :result {:error true}}])
 
-(deftest ^:integration db-vacancy-test
+(deftest ^:integration create-vacancy-test
+  (testing "vdb/create-vacancy should throw error on preconditions"
+    (helpers/should-throw #(vdb/create-vacancy nil nil))
+    (helpers/should-throw #(vdb/create-vacancy {} nil))
+    (helpers/should-throw #(vdb/create-vacancy nil {})))
+
   (testing "vdb/create-vacancy should create vacancy"
     (with-db (fn [db]
                (map (fn [{:keys [vacancy result]}]
                       (if (:error result)
                         (helpers/should-throw #(vdb/create-vacancy db vacancy))
                         (helpers/should-not-throw #(vdb/create-vacancy db vacancy))))
-                    test-cases))))
-
+                    test-cases)))))
+  
+(deftest ^:integration get-vacancies-test
   (testing "vdb/get-vacancies should return empty list on empty database"
     (with-db (fn [db]
                (is (list) (vdb/get-vacancies db))))))

@@ -6,6 +6,7 @@
 
 (defn create-vacancy
   [database vacancy]
+  {:pre [(some? database) (some? vacancy)]}
   (sql/with-db-connection [c (:connection database)]
     (-> (sql/insert! c VACANCIES vacancy)
         (first))))
